@@ -1,11 +1,7 @@
 from app.models import TaskOutput
 
-import asyncio
-import logging
-import sys
 import os
 from dotenv import load_dotenv
-import logfire
 from pydantic_ai import Agent
 from pydantic_ai.mcp import MCPServerHTTP
 
