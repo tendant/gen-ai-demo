@@ -4,4 +4,4 @@ dev:
 demo:	
 	curl -X POST http://localhost:8000/generate \
 	  -H "Content-Type: application/json" \
-	  -d '{"description": "Organize the team backlog"}'
+	  -d '{"description": "list all schemas"}'

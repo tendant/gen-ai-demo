@@ -4,5 +4,4 @@ class TaskInput(BaseModel):
     description: str
 
 class TaskOutput(BaseModel):
-    title: str
-    priority: str
+    output: str

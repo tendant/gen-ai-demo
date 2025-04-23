@@ -5,5 +5,5 @@ from app.services import generate_task
 router = APIRouter()
 
 @router.post("/generate", response_model=TaskOutput)
-def generate(data: TaskInput):
-    return generate_task(data.description)
+async def generate(data: TaskInput):
+    return await generate_task(data.description)

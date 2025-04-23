@@ -1,13 +1,28 @@
-from pydantic_ai import Agent
 from app.models import TaskOutput
+
+import os
+from dotenv import load_dotenv
+from pydantic_ai import Agent
+from pydantic_ai.mcp import MCPServerHTTP
+
+
+load_dotenv()
+
+
+mcp_server_url = os.getenv('MCP_SERVER_URL', 'http://localhost:8080/sse')
+server = MCPServerHTTP(url=mcp_server_url)  
+
 
 
 agent = Agent(
-    model='openai:gpt-4o',
+    model='anthropic:claude-3-7-sonnet-20250219',
     result_type=TaskOutput,
-    system_prompt='Generate a task title and priority based on the description.',
+    mcp_servers = [server],
+    system_prompt='use mcp server to find info of database',
     instrument=False,
 )
 
-def generate_task(prompt: str) -> TaskOutput:
-    return agent.run_sync(prompt).data
+async def generate_task(prompt: str) -> TaskOutput:
+    async with agent.run_mcp_servers():
+        result = await agent.run(prompt)
+        return result.data
