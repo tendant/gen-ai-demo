@@ -4,3 +4,4 @@ pydantic
 pydantic-ai
 openai
 python-dotenv
+rich
